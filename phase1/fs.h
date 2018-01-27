@@ -4,10 +4,11 @@
  * Rajat Nigam
 */
 
-#ifndef DIRECTORY_H_
-#define DIRECTORY_H_
+#ifndef FS_H_
+#define FS_H_
 
-#include"macros.h"
+#include "macros.h"
+#include "block.h"
 
 #define MODE_STRING_SIZE 5
 
@@ -32,13 +33,13 @@ struct timestamp{
 
 struct inode{
     //struct inode * parent; // To store the ..	
-    unsigned short int disk; //disk number not required for one disk scenario
+//    unsigned short int disk; //disk number not required for one disk scenario
     unsigned long int inode_num; //inode identifier
     unsigned int size; //size of the file in blocks
     struct mode_string mstring; // This to store type of the file and permission bit 
     //int block_p[BLOCKS_PER_FILE]; //block numbers where data is stored
     struct timestamp tstamp; // The time stamp contains the mtime, ctime and atime
-    int indirect_p; //block number where the first level indirect pointers are stored : there are POINTERS_PER_BLOCK stored in each block
+    struct disk_block * indirect_p; //block number where the first level indirect pointers are stored : there are POINTERS_PER_BLOCK stored in each block
     unsigned int num_blocks; // Stores the number of blocks per file.	
 };
 
@@ -48,10 +49,13 @@ struct directory{
 	char name[MAX_LENGTH];
 };	
 
-struct inode createInode();
+struct inode create_inode();
 //int getDisk(struct inode *p);
-unsigned long int getInodeNum(struct inode *p);
+unsigned long int get_inode_num(struct inode *);
 // update time stamp when the file is accessed, modified or deleted.
+int update_time_stamp(struct timestamp *);
 // create a directory mapping.
+int create_directory_mapping(struct directory *);
 // generate unique inode number
+unsigned long int generate_unique_inode_num();
 #endif

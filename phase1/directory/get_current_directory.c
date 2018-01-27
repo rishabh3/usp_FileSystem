@@ -2,6 +2,8 @@
  * Ravi Shreyas 	  *
  * Rishabh Dutt 	  *
  * Rajat Nigam		  */
+#include "fs.h"
+#include "dir.h"
 
 char * get_current_directory(){
 	char* pathname = NULL;

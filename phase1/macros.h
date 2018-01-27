@@ -23,4 +23,11 @@
 #define D_BLOCK 0x01 //flag for data block
 #define P_BLOCK 0x02 //flag for indirect block
 
+#define NR_DISK_BLOCK 125000 //Total Number of disk blocks we have for our filesystem.
+#define DISK_NUM 	1 //Basically we have only one disk.
+#define IN_USE 	1
+#define COMPLETELY_FILLED 2
+#define INODE_START 1
+#define INODE_END 16
+#define MAX_INODE_SPACE 72
 #endif
